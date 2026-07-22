@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch-02: HTML Skeleton & Tags — Reviano Hub</title>
+<link rel="stylesheet"href="chapter02.css">
+</head>
+<body>
+
+<h1>Module 1: Core Foundations</h1>
+<h2>Chapter 02: HTML Skeleton & Tags 🦴</h2>
+
+<p>Namaste Developers! Pichle chapter mein humne samjha tha ki Internet aur Web kaam kaise karte hain — parde ke peeche wala pura game. Ab waqt hai actual building shuru karne ka! 🏗️</p>
+
+<p>Lekin bhai, koi bhi building banane se pehle uska structure (skeleton) khada karna padta hai. Aaj hum HTML ka wo skeleton seekhenge jispe tumhari poori website khadi hogi. Ye chapter thoda "boring" lag sakta hai kyunki koi flashy design nahi hai, lekin trust me — agar tumhe ye foundation clear nahi hui, toh aage jaake bade-bade bugs tumhe pareshaan karenge.</p>
+
+<p>Chalo shuru karte hain! 💪</p>
+
+<hr>
+
+<h3>🎯 Chapter Roadmap</h3>
+<ol>
+  <li>The HTML Boilerplate / Skeleton (Line-by-Line Breakdown)</li>
+  <li>Elements vs Tags vs Attributes</li>
+  <li>Self-Closing / Empty Tags (Void Elements)</li>
+  <li>Block-Level vs Inline Elements</li>
+</ol>
+
+<hr>
+
+<h2>Pillar 1: The HTML Boilerplate / Skeleton 🦴</h2>
+
+<p>Jab bhi tum ek naya .html file banate ho, VS Code mein ek "magic" code auto-complete se aa jaata hai (agar tum Emmet use karte ho, ! type karke Tab dabao). Ye code hai:</p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Ye hai woh "Boilerplate" — matlab woh standard starting template jo har HTML document mein hona chahiye. Lekin 90% beginners bina samjhe ise copy-paste karte hain. Aaj hum is boilerplate ki har ek line ko postmortem karenge — line by line, bilkul deep! 🔬</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Ye boilerplate ek "Human Skeleton" jaisa hai. Jaise tumhare body mein pehle ek skeleton (haddiyan) hota hai jispe muscles, skin, aur organs tike hote hain — waise hi HTML boilerplate wo base skeleton hai jispe tumhari poori website (content, images, styling) tiki hogi. Bina skeleton ke, body khadi nahi ho sakti — bina boilerplate ke, website "properly" nahi chal sakti.</p>
+</blockquote>
+
+<h3>Line 1: &lt;!DOCTYPE html&gt; — Browser Ko Batana "Bhai Ye HTML5 Hai"</h3>
+
+<pre>&lt;!DOCTYPE html&gt;</pre>
+
+<ul>
+  <li>Ye technically ek HTML tag nahi hai — ye ek "declaration" hai jo browser ko batata hai ki ye document kis HTML version mein likha gaya hai.</li>
+  <li>&lt;!DOCTYPE html&gt; ka simple matlab hai: "Hey Browser, ye document HTML5 standard follow karta hai."</li>
+  <li>Ye hamesha sabse pehli line honi chahiye, document mein kisi bhi space ya comment se pehle.</li>
+</ul>
+
+<p><strong>Agar hum ise skip kar dein toh kya hoga?</strong> 🤔</p>
+
+<p>Agar &lt;!DOCTYPE html&gt; missing hoga, toh browser ek purane mode mein chala jaata hai jise "Quirks Mode" kehte hain.</p>
+
+<ul>
+  <li>Quirks Mode mein browser purane, inconsistent, aur outdated rendering rules use karta hai (jo 1990s ke non-standard browsers ke time follow hote the).</li>
+  <li>Iska matlab hai ki tumhari CSS aur layout different browsers mein different tarike se dikhengi — jo ek nightmare hai debugging ke liye!</li>
+  <li>Modern mode ko "Standards Mode" kehte hain, jo &lt;!DOCTYPE html&gt; likhne se activate hota hai — isme browser latest, consistent web standards follow karta hai.</li>
+</ul>
+
+<p>⚠️ <strong>Common Mistake:</strong> Bahut log sochte hain DOCTYPE ek HTML tag hai isliye ise &lt;doctype html&gt; ya &lt;DocType HTML&gt; type kar dete hain, ya phir isse close karne ki koshish karte hain jaise &lt;!DOCTYPE html/&gt;. Bhai, ye ek declaration hai, tag nahi — na ye case-sensitive hai (chahe capital ho ya small), na hi ise close karna padta hai!</p>
+
+<h3>Line 2: &lt;html lang="en"&gt; — Poore Document Ka Root Container</h3>
+
+<pre>
+&lt;html lang="en"&gt;
+...
+&lt;/html&gt;
+</pre>
+
+<ul>
+  <li>&lt;html&gt; tag pura HTML document ka root element hai — matlab har doosra element (head, body, sab kuch) isi ke andar aata hai.</li>
+  <li>lang="en" ek attribute hai jo browser ko batata hai ki iss document ki language English hai.</li>
+</ul>
+
+<p><strong>lang attribute kyun important hai?</strong></p>
+<ol>
+  <li><strong>Screen Readers (Accessibility):</strong> Agar koi visually-impaired user tumhari site ko screen reader se access kar raha hai, toh screen reader lang attribute dekh ke sahi pronunciation aur accent use karta hai. Agar lang="en" set hai lekin content Hindi mein hai, toh screen reader galat pronunciation karega!</li>
+  <li><strong>SEO Aur Translation Tools:</strong> Google aur browser translation tools (jaise Google Translate) lang attribute ke through samajhte hain ki page kis language mein hai, taaki sahi translation suggest kar sakein.</li>
+  <li><strong>Spell Check:</strong> Browser ka built-in spell-checker bhi lang attribute ke through decide karta hai ki kis language ka dictionary use karna hai.</li>
+</ol>
+
+<p>💡 <strong>Pro-Tip:</strong> Agar tumhari website Hindi content ke liye hai, toh lang="hi" use karo. Aur agar site multilingual hai (jaise Hinglish content), toh main document language ke hisaab se set karo — jaise humari Reviano Hub ka content mostly English UI + Hinglish text hai, toh lang="en" sahi rahega.</p>
+
+<h3>The &lt;head&gt; Tag — Website Ka "Brain" (Invisible Metadata) 🧠</h3>
+
+<pre>
+&lt;head&gt;
+    ...
+&lt;/head&gt;
+</pre>
+
+<p>&lt;head&gt; tag ek container hai jisme metadata (matlab data about the data) hota hai. Ye important baat hai: <strong>&lt;head&gt; ke andar ka content, users ko webpage par directly nahi dikhta!</strong> Ye sirf browser aur search engines ke liye information carry karta hai.</p>
+
+<p>&lt;head&gt; ke andar generally ye cheezein aati hain:</p>
+<ul>
+  <li>&lt;meta&gt; tags (charset, viewport, description, keywords)</li>
+  <li>&lt;title&gt; tag (browser tab mein dikhne wala text)</li>
+  <li>&lt;link&gt; tags (CSS files link karne ke liye)</li>
+  <li>&lt;script&gt; tags (kabhi kabhi JS files bhi yahan link hoti hain)</li>
+</ul>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> &lt;head&gt; ek kitaab ke "Title Page + Publisher Info" jaisa hai. Jab tum kitaab kholte ho, uska cover page tumhe kitaab ka title, author, publisher ka naam dikhata hai — ye information kitaab ki "story" nahi hai, lekin kitaab ke baare mein zaroori details hai. Waise hi &lt;head&gt; mein website ki "story" (visible content) nahi hoti, balki uske baare mein zaroori technical details hoti hain.</p>
+</blockquote>
+
+<h3>&lt;meta charset="UTF-8"&gt; — Character Encoding Set Karna</h3>
+
+<pre>&lt;meta charset="UTF-8"&gt;</pre>
+
+<p>Ye line browser ko batati hai ki document mein kaunsa character encoding use hua hai.</p>
+
+<p><strong>Character Encoding Kya Hai?</strong></p>
+
+<p>Computer ke andar sab kuch binary (0s and 1s) mein store hota hai. Har character (jaise 'A', '5', '😀', 'अ') ko ek specific binary code assign kiya jaata hai. Character Encoding ek system hai jo decide karta hai ki kaunsa character kis binary number se represent hoga.</p>
+
+<p><strong>UTF-8 kyun best hai?</strong></p>
+<ul>
+  <li>UTF-8 ek universal encoding standard hai jo duniya ki almost saari languages (English, Hindi, Chinese, Arabic, emojis 😃) ko support karta hai.</li>
+  <li>Agar tum charset="UTF-8" nahi likhoge, toh browser default encoding guess karega — aur agar galat guess hui, toh tumhari website par special characters, emojis, ya non-English text "�" jaise garbage symbols mein dikh sakte hain!</li>
+</ul>
+
+<p>⚠️ <strong>Common Mistake:</strong> Bahut beginners jab apni website mein Hindi text ya emojis daalte hain aur charset="UTF-8" set nahi karte, toh unhe browser mein weird boxes ya question marks dikhte hain (jaise Ã¢â‚¬â„¢). Ye issue seedha resolve ho jaata hai jab tum &lt;meta charset="UTF-8"&gt; add kar dete ho &lt;head&gt; ke sabse upar!</p>
+
+<p>💡 <strong>Pro-Tip:</strong> charset="UTF-8" ko hamesha &lt;head&gt; tag ki sabse pehli line rakho (&lt;title&gt; se bhi pehle), kyunki browser ko encoding turant pata chalni chahiye taaki woh baaki text ko sahi tarike se parse kar sake.</p>
+
+<h3>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; — Mobile Responsiveness Ka Foundation 📱</h3>
+
+<p>Ye line thodi complex lagti hai, lekin iska kaam bahut simple aur bahut important hai — ye tumhari website ko mobile-friendly banata hai!</p>
+
+<p><strong>Bina Viewport Meta Tag Ke Kya Hota Hai?</strong></p>
+
+<p>Purane zamane mein (jab sirf desktops the), websites fixed-width mein design hoti thi. Jab mobile phones aaye, toh mobile browsers ne ek "trick" use ki — woh webpage ko ek virtual, wide desktop screen (jaise 980px width) maan ke render karte the, aur phir use zoom-out karke chote mobile screen mein fit karte the.</p>
+
+<p>Iska result: Website mobile par chhoti-chhoti, unreadable text ke saath dikhti thi, aur user ko manually pinch-zoom karna padta tha!</p>
+
+<p><strong>Viewport Meta Tag Isko Fix Karta Hai:</strong></p>
+
+<pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</pre>
+
+<ul>
+  <li><strong>width=device-width:</strong> Ye browser ko bolta hai — "Webpage ki width, device ki actual screen width ke barabar rakho" (na ki fake 980px wide desktop screen jaisi).</li>
+  <li><strong>initial-scale=1.0:</strong> Ye initial zoom level set karta hai — matlab jab page pehli baar load ho, tab zoom level 100% (1.0) rahega, na zoomed-in na zoomed-out.</li>
+</ul>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Viewport meta tag ek "Tailor (Darzi)" jaisa hai jo tumhari website ke kapde (layout) ko exact device ke size ke hisaab se fit karta hai. Bina tailor ke, tumhari website ek "one-size-fits-all" oversized kapde jaisi dikhegi jo chote screen (mobile) par bilkul fit nahi hogi.</p>
+</blockquote>
+
+<p>⚠️ <strong>Common Mistake:</strong> Bahut naye developers apni website desktop par perfectly design kar lete hain, lekin viewport meta tag bhool jaate hain. Result: unki website mobile par completely tooti-phooti (broken) dikhti hai — text bahut chota, buttons overlap karte hain, aur user ko continuously zoom karna padta hai. Ye tag NON-NEGOTIABLE hai har modern website ke liye!</p>
+
+<h3>&lt;title&gt; Tag — Browser Tab Ka Naam</h3>
+
+<pre>&lt;title&gt;Reviano Hub - Learn Web Development&lt;/title&gt;</pre>
+
+<ul>
+  <li>Ye text browser ke tab mein dikhta hai.</li>
+  <li>Ye bookmark karte waqt bhi is naam se save hota hai.</li>
+  <li>Search engines (Google) is title ko search results ka headline banake dikhate hain — isliye ye SEO ke liye bhi bahut important hai!</li>
+</ul>
+
+<h3>&lt;body&gt; Tag — Woh Sab Kuch Jo User Ko Dikhta Hai 👀</h3>
+
+<pre>
+&lt;body&gt;
+    &lt;h1&gt;Welcome to Reviano Hub&lt;/h1&gt;
+    &lt;p&gt;Let's learn web development!&lt;/p&gt;
+&lt;/body&gt;
+</pre>
+
+<p>Agar &lt;head&gt; invisible metadata hai, toh &lt;body&gt; uska complete opposite hai — <strong>&lt;body&gt; ke andar jo bhi likha jaayega, woh directly browser screen par visible hoga!</strong></p>
+
+<p>Isme aata hai:</p>
+<ul>
+  <li>Saara text content (headings, paragraphs)</li>
+  <li>Images, videos</li>
+  <li>Buttons, forms, links</li>
+  <li>Har woh element jisse user interact kar sakta hai ya dekh sakta hai</li>
+</ul>
+
+<p><strong>Agar &lt;body&gt; tag skip kar diya jaaye toh kya hoga?</strong></p>
+
+<p>Interesting fact — modern browsers itne "forgiving (maafi dene wale)" hain ki agar tum &lt;body&gt; tag likhna bhool bhi jao, toh browser automatically ek implicit &lt;body&gt; bana ke tumhara content usme daal deta hai! Lekin ye bahut bad practice hai — professional code mein hamesha explicitly &lt;body&gt; likhna chahiye, kyunki:</p>
+<ol>
+  <li>Code readable aur organized rehta hai.</li>
+  <li>Kuch CSS/JS techniques specifically &lt;body&gt; tag target karti hain — agar woh explicitly nahi hai, toh unexpected behavior ho sakta hai.</li>
+</ol>
+
+<p>💡 <strong>Pro-Tip:</strong> Poora boilerplate yaad rakhne ki zaroorat nahi hai! VS Code mein Emmet Abbreviation feature use karo — naye .html file mein sirf ! type karke Tab dabao, poora boilerplate auto-generate ho jaayega. Lekin fir bhi, is chapter ko samajhna zaroori hai taaki tumhe pata ho ki wo auto-generated code actually kya kar raha hai!</p>
+
+<hr>
+
+<h2>Pillar 2: Elements vs Tags vs Attributes 🧩</h2>
+
+<p>Ye teeno terms — Element, Tag, aur Attribute — bahut confusing lagte hain beginners ke liye, kyunki log inhe interchangeably use karte hain. Lekin technically, teeno alag-alag cheezein hain! Chalo ek example se samajhte hain:</p>
+
+<pre>&lt;p class="intro"&gt;Hello World&lt;/p&gt;</pre>
+
+<p>Isko hum piece-by-piece todte hain:</p>
+
+<pre>
+&lt;p class="intro"&gt;Hello World&lt;/p&gt;
+ |  |      |      |           |
+ |  |      |      |           +-- Closing Tag
+ |  |      |      +-------------- Content
+ |  |      +--------------------- Attribute Value
+ |  +---------------------------- Attribute Name
+ +------------------------------- Opening Tag
+</pre>
+
+<h3>Tag Kya Hai? (The Building Blocks)</h3>
+
+<p><strong>Tag</strong> woh markup keyword hai jo angle brackets &lt; &gt; mein likha jaata hai. Tags do type ke hote hain:</p>
+<ul>
+  <li><strong>Opening Tag:</strong> &lt;p&gt; — Ye batata hai ki content yahan se start ho raha hai.</li>
+  <li><strong>Closing Tag:</strong> &lt;/p&gt; — Ye batata hai ki content yahan khatam ho raha hai. Dhyan do — closing tag mein ek forward slash / hota hai.</li>
+</ul>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Tags ek "Sandwich ke do slices of bread" jaise hote hain — opening tag top wali slice hai, aur closing tag bottom wali slice hai. Beech mein jo filling (content) hai, wahi actual data hai jo tum serve karna chahte ho!</p>
+</blockquote>
+
+<h3>Element Kya Hai? (The Complete Package)</h3>
+
+<p><strong>Element</strong> = Opening Tag + Content + Closing Tag — matlab poora combo!</p>
+
+<p>Jab tum bolte ho "Ye ek &lt;p&gt; element hai", tab tumhara matlab hota hai poora &lt;p class="intro"&gt;Hello World&lt;/p&gt; — sirf &lt;p&gt; tag nahi, balki uska content aur closing tag bhi.</p>
+
+<p>⚠️ <strong>Common Mistake:</strong> Log kehte hain "Mujhe &lt;p&gt; tag ko style karna hai" jab woh actually poore &lt;p&gt; element ki baat kar rahe hote hain (jisme content bhi included hai). Technically, "tag" sirf woh markup syntax hai &lt;p&gt; ya &lt;/p&gt;, jabki "element" pura structure hai. Interview mein ye difference clarify karna smart lagta hai!</p>
+
+<h3>Attribute Kya Hai? (Extra Information)</h3>
+
+<p><strong>Attribute</strong> wo extra information hai jo tum opening tag ke andar likhte ho, jo element ke behavior, style, ya identity ko customize karta hai.</p>
+
+<ul>
+  <li><strong>Attribute Name:</strong> class — batata hai attribute ka type kya hai.</li>
+  <li><strong>Attribute Value:</strong> "intro" — batata hai us attribute ki actual value kya hai (hamesha quotes " " mein likhi jaati hai).</li>
+  <li>Syntax hamesha: attributename="value"</li>
+</ul>
+
+<p>Common attributes ke examples:</p>
+<pre>
+&lt;img src="cat.jpg" alt="A cute cat" width="300"&gt;
+&lt;a href="https://google.com" target="_blank"&gt;Visit Google&lt;/a&gt;
+&lt;input type="text" placeholder="Enter your name" disabled&gt;
+</pre>
+
+<p>Ek element mein multiple attributes ho sakte hain (upar wale &lt;img&gt; tag mein 3 attributes hain: src, alt, width).</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Attributes ek "Insaan ki ID Card" jaisi details hain. Insaan (Element) ka naam, age, address (Attributes) hote hain jo us insaan ko describe karte hain, lekin ye insaan ka "core existence" nahi hai — sirf extra information hai jo usko unique banati hai.</p>
+</blockquote>
+
+<p>💡 <strong>Pro-Tip:</strong> Kabhi kabhi tum "Boolean Attributes" dekhoge jaise disabled, checked, required — inki koi value nahi hoti, sirf inka hona hi kaafi hai unka effect activate karne ke liye! Jaise &lt;input type="text" disabled&gt; — yahan disabled likhne se hi input box disable ho jaata hai, disabled="true" likhne ki zaroorat nahi.</p>
+
+<hr>
+
+<h2>Pillar 3: Self-Closing / Empty Tags (Void Elements) 🔓</h2>
+
+<p>Ab tak humne dekha ki har tag ka ek opening aur closing version hota hai (&lt;p&gt;...&lt;/p&gt;). Lekin kuch tags aise hote hain jinke paas koi closing tag nahi hota, aur koi content bhi nahi hota unke beech mein। Inhe "Void Elements" ya "Self-Closing Tags" kehte hain।</p>
+
+<h3>Void Elements Kya Hain?</h3>
+
+<p>Kuch common void elements:</p>
+
+<pre>
+&lt;br&gt;          &lt;!-- Line break --&gt;
+&lt;hr&gt;          &lt;!-- Horizontal line --&gt;
+&lt;img src="photo.jpg" alt="Photo"&gt;   &lt;!-- Image --&gt;
+&lt;input type="text"&gt;                  &lt;!-- Input field --&gt;
+&lt;meta charset="UTF-8"&gt;               &lt;!-- Metadata --&gt;
+&lt;link rel="stylesheet" href="style.css"&gt;  &lt;!-- CSS link --&gt;
+</pre>
+
+<p><strong>Inke closing tag kyun nahi hote?</strong></p>
+
+<p>Simple logic hai — ye tags apna kaam khud hi (bina kisi "content" ke) poora kar lete hain। Inhe kisi text ya doosre elements ko "wrap" karne ki zaroorat nahi hoti।</p>
+
+<p>Socho, &lt;br&gt; tag ka kaam sirf ek line break create karna hai। Isme "content" daalne ka koi matlab hi nahi hai — ye khud mein complete hai। Isi tarah &lt;img&gt; tag apni src attribute se image dikhata hai, usse "content" ki zaroorat nahi.</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Normal tags (jaise &lt;p&gt;...&lt;/p&gt;) ek "Dabba (Box)" jaisे hote hain jinme tum kuch cheez (content) rakhte ho। Lekin Void Elements ek "Stamp/Seal" jaisे hote hain — jaise tum kisi document par ek stamp laga dete ho, woh khud mein complete action hai, usme kuch "andar" rakhne ki zaroorat nahi hoti।</p>
+</blockquote>
+
+<h3>HTML5 Syntax vs XHTML Syntax</h3>
+
+<p>Tumne kabhi dekha hoga ki log &lt;br&gt; ko &lt;br /&gt; bhi likhte hain (ek extra / ke saath)। Ye dono valid hain, lekin thoda history samjho:</p>
+
+<ul>
+  <li><strong>HTML5 Syntax:</strong> &lt;br&gt; — Modern, clean, aur recommended way। Slash ki zaroorat nahi।</li>
+  <li><strong>XHTML/XML Syntax:</strong> &lt;br /&gt; — Purane XHTML standard se aaya hai, jaha strict XML rules follow karne padte the (har tag close hona chahiye)।</li>
+</ul>
+
+<p>Aajkal HTML5 mein dono chalte hain, lekin modern best practice hai &lt;br&gt; likhna (bina slash ke), kyunki HTML5 specification ke according, void elements ko close karne ki koi zaroorat nahi hai।</p>
+
+<p>⚠️ <strong>Common Mistake:</strong> Beginners kabhi kabhi &lt;img src="photo.jpg"&gt; ke baad bhi ek &lt;/img&gt; closing tag lagane ki koshish karte hain, jo completely galat aur invalid hai! Void elements ke paas closing tags nahi hote — na &lt;/img&gt;, na &lt;/br&gt;, na &lt;/input&gt;। Browser aisa code silently ignore kar dega ya error de sakta hai depending on strictness।</p>
+
+<p>💡 <strong>Pro-Tip:</strong> Yaad rakhne ka trick — jo tags kisi cheez ko "insert" ya "embed" karte hain (image, line break, input field, meta info), unke paas generally closing tag nahi hota, kyunki unka poora purpose hi ek single, self-contained action perform karna hai।</p>
+
+<hr>
+
+<h2>Pillar 4: Block-Level vs Inline Elements 📦</h2>
+
+<p>Ye concept samajhna extremely important hai kyunki ye decide karta hai ki tumhari website ka layout kaise dikhega। Har HTML element browser ke through ek specific "default behavior" ke saath treat hota hai — kuch elements poori width lete hain, aur kuch sirf jitni zaroorat ho utni space lete hain।</p>
+
+<h3>Block-Level Elements — "Poori Row Meri Hai!"</h3>
+
+<p><strong>Block-level elements</strong> browser mein hamesha ek naye line se start hote hain, aur by default poori available width (apne parent container ki) le lete hain — chahe unke andar ka content chota hi kyun na ho।</p>
+
+<p>Common block-level elements:</p>
+<pre>
+&lt;div&gt;, &lt;p&gt;, &lt;h1&gt; to &lt;h6&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;,
+&lt;header&gt;, &lt;footer&gt;, &lt;section&gt;, &lt;article&gt;, &lt;form&gt;
+</pre>
+<p>Example:</p>
+<pre>
+&lt;h1&gt;Title&lt;/h1&gt;
+&lt;p&gt;Paragraph 1&lt;/p&gt;
+&lt;p&gt;Paragraph 2&lt;/p&gt;
+</pre>
+
+<p>Yahan chahe "Title" sirf 5 characters ka hai, phir bhi &lt;h1&gt; poori line ki width le lega, aur uske baad wala &lt;p&gt; ek naye line par shuru hoga — kyunki block elements apne aage-peeche automatically line breaks create kar lete hain।</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Block-Level Elements ek "Building ki Ek Poori Floor" jaise hain। Chahe floor par sirf ek chhota sa office ho ya poora floor bhara ho, floor ki poori width us floor ke liye reserved hoti hai — koi doosri cheez usी floor par "side mein" nahi aa sakti। Har naya floor (naya block element) ek naye level se start hota hai।</p>
+</blockquote>
+
+<h3>Inline Elements — "Mujhe Jitni Zaroorat, Utni Hi Space Doh"</h3>
+
+<p><strong>Inline elements</strong> sirf apne content ke hisaab se jitni space chahiye, utni hi lete hain — aur ye apne aas-paas ke content ke saath "same line" mein continue rehte hain, naya line break create nahi karte।</p>
+
+<p>Common inline elements:</p>
+<pre>
+&lt;span&gt;, &lt;a&gt;, &lt;strong&gt;, &lt;em&gt;, &lt;b&gt;, &lt;i&gt;, &lt;img&gt;, &lt;code&gt;
+</pre>
+
+<p>Example:</p>
+<pre>&lt;p&gt;Ye ek &lt;strong&gt;important&lt;/strong&gt; word hai is sentence mein.&lt;/p&gt;</pre>
+
+<p>Yahan &lt;strong&gt;important&lt;/strong&gt; sirf "important" word jitni space leta hai, aur baaki sentence usी line mein continue hota hai — kyunki &lt;strong&gt; ek inline element hai।</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Inline Elements ek "Ek Sentence Mein Bold Kiya Gaya Word" jaise hain — jaise agar tum kisi kitaab mein ek word ko bold karte ho, toh poora page ya poori line disturb nahi hoti, sirf woh specific word apni jagah par style ho jaata hai, aur baaki text usी flow mein continue rehta hai।</p>
+</blockquote>
+
+<h3>Technical Reason: display Property Ki Wajah Se</h3>
+
+<p>Ye behavior isliye hota hai kyunki har HTML element ke paas ek default CSS display property value hoti hai, jo browser ne pehle se set kar rakhi hai:</p>
+
+<pre>
+/* Browser ke default stylesheet mein kuch aisा hota hai: */
+div, p, h1 { display: block; }
+span, a, strong { display: inline; }
+</pre>
+
+<ul>
+  <li><strong>display: block</strong> wale elements: Full width lete hain, naya line create karte hain, aur width/height/margin/padding sabhi directions mein apply hote hain।</li>
+  <li><strong>display: inline</strong> wale elements: Content jitni width lete hain, naya line create nahi karte, aur width/height set karne ka koi effect nahi hota (kyunki ye sirf content ke around fit hote hain)। Sirf left-right margin/padding hi properly apply hote hain, top-bottom thoda differently behave karte hain।</li>
+</ul>
+
+<p>⚠️ <strong>Common Mistake:</strong> Beginners jab ek &lt;span&gt; ya &lt;a&gt; tag par width: 200px; height: 50px; CSS lagate hain, toh confuse ho jaate hain jab ye kaam nahi karta! Wajah simple hai — inline elements par width/height by default apply nahi hote। Isko fix karne ke liye tumhe uski display property ko block ya inline-block mein change karna padta hai (display: inline-block sabse popular solution hai, kyunki isse element same line mein rehta hai lekin width/height bhi respect karta hai)।</p>
+
+<p>💡 <strong>Pro-Tip:</strong> Agla practical step ye hai ki tum browser DevTools (F12) khol ke kisi bhi element par right-click karke "Inspect" karo, aur "Computed" tab mein check karo uski display property kya hai। Isse tumhe real-time samajh aayegi ki kaunsa element block hai aur kaunsa inline hai — bina guess kiye!</p>
+
+<h3>Bonus: &lt;div&gt; vs &lt;span&gt; — The Generic Containers</h3>
+
+<p>Ye dono elements khaas taur par important hain kyunki inke paas koi semantic meaning nahi hoti — matlab ye sirf generic containers hain jo styling/grouping ke liye use hote hain:</p>
+
+<ul>
+  <li><strong>&lt;div&gt;</strong> — Generic block-level container। Jab tumhe content ka ek bada chunk group karna ho (jaise ek complete card, section, ya layout box), &lt;div&gt; use karo।</li>
+  <li><strong>&lt;span&gt;</strong> — Generic inline container। Jab tumhe ek sentence ke beech mein sirf ek word ya chhote se part ko style karna ho (bina line break create kiye), &lt;span&gt; use karo।</li>
+</ul>
+
+<pre>
+&lt;div class="card"&gt;
+    &lt;p&gt;Ye ek &lt;span class="highlight"&gt;specific word&lt;/span&gt; hai jise highlight karna hai.&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> &lt;div&gt; ek "Bada Dabba (Box)" hai jisme tum poori cheezein pack karte ho (jaise moving boxes), aur &lt;span&gt; ek "Highlighter Pen" hai jisse tum kisi text ke sirf ek specific part ko highlight karte ho, bina poore page ka layout disturb kiye।</p>
+</blockquote>
+
+<hr>
+
+<h2>🎓 Chapter Summary — Ek Nazar Mein</h2>
+
+<ol>
+  <li><strong>HTML Boilerplate</strong> har website ka skeleton hai — &lt;!DOCTYPE html&gt; browser ko HTML5 standard batata hai, &lt;html lang="en"&gt; root container hai, &lt;head&gt; invisible metadata rakhta hai (charset, viewport, title), aur &lt;body&gt; mein saara visible content hota hai।</li>
+  <li><strong>Tag</strong> sirf markup syntax hai (&lt;p&gt;), <strong>Element</strong> poora package hai (opening tag + content + closing tag), aur <strong>Attribute</strong> extra information hai jo opening tag ke andar likhi jaati hai (class="intro")।</li>
+  <li><strong>Void Elements</strong> (jaise &lt;br&gt;, &lt;img&gt;, &lt;input&gt;) apna kaam khud-mukhtar (self-sufficient) tarike se karte hain, isliye unhe closing tags ya content ki zaroorat nahi hoti।</li>
+  <li><strong>Block-level elements</strong> poori width lete hain aur naya line create karte hain (jaise &lt;div&gt;, &lt;p&gt;), jabki <strong>Inline elements</strong> sirf apne content jitni space lete hain aur same line mein continue rehte hain (jaise &lt;span&gt;, &lt;a&gt;)।</li>
+</ol>
+
+<p>Bhai, agar tumne ye chapter dhang se samajh liya, toh ab tumhe pata hai ki har website ka structural DNA kaisa dikhta hai। Ye foundation itni strong hai ki ab tum kisi bhi complex webpage ke HTML ko dekh ke uska structure samajh sakte ho!</p>
+
+<p>Next chapter mein hum Text-formatting tags aur Semantic HTML ki duniya mein deep dive karenge — taaki tumhari websites sirf "kaam" na karein, balki professionally structured bhi hon।</p>
+
+<p><strong>Chalo, Chapter 03 ki taraf badhte hain! 🚀</strong></p>
+
+<hr>
+<div class="footer-navigation">
+    <a href="chapter03.html" class="next-btn">Next Chapter: Chapter 03 🚀</a>
+    <a href="Html.html" class="back-dashboard-btn">← Back to Dashboard</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+/* --- Core Styles & Setup --- */
+:root {
+    --bg: #f8f9fa;
+    --white: #ffffff;
+    --text: #2d3748;
+    --muted: #718096;
+    --purple: #805ad5;
+    --purple-bg: #faf5ff;
+    --green: #38a169;
+    --green-bg: #f0fff4;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, sans-serif; }
+body { background: var(--bg); color: var(--text); padding: 20px; line-height: 1.5; }
+main { max-width: 1100px; margin: 0 auto; }
+
+/* --- Header Section (Purple & White) --- */
+header {
+    background: var(--white);
+    border: 1px solid #e9d8fd;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 35px;
+    box-shadow: 0 4px 6px -1px rgba(128, 90, 213, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.logo-container h1 { color: var(--purple); font-size: 2rem; font-weight: 800; }
+.logo-container span { color: var(--muted); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
+
+/* Nav & Search */
+nav a { color: var(--text); text-decoration: none; font-weight: 600; padding: 4px 8px; border-radius: 6px; transition: 0.2s; }
+nav a:hover { background: var(--purple-bg); color: var(--purple); }
+.search-bar input {
+    width: 100%; max-width: 360px; padding: 10px 16px;
+    background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 8px;
+    transition: 0.2s;
+}
+.search-bar input:focus { outline: none; border-color: var(--purple); background: var(--white); box-shadow: 0 0 0 3px rgba(128, 90, 213, 0.15); }
+
+/* --- Modules & Cards Layout --- */
+section { margin-bottom: 40px; }
+section h2 { font-size: 1.4rem; margin-bottom: 20px; }
+.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+.chapter-card {
+    background: var(--white); border: 1px solid #edf2f7; border-radius: 12px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); transition: 0.2s;
+}
+.chapter-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); }
+.card-header { padding: 20px 20px 10px; }
+.card-body { padding: 0 20px 20px; flex-grow: 1; display: flex; flex-direction: column; gap: 15px; }
+.card-body p { color: var(--muted); font-size: 0.9rem; }
+.card-footer { padding: 15px 20px; border-top: 1px solid #f7fafc; }
+
+/* --- Dynamic Badges & Buttons --- */
+.badge { align-self: flex-start; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; }
+.btn-start { display: block; text-align: center; padding: 10px 0; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
+
+/* Module 1 (Green Concept) */
+#module1 .badge { background: var(--green-bg); color: var(--green); border: 1px solid #c6f6d5; }
+#module1 .btn-start { background: var(--green-bg); color: var(--green); border: 1px solid #c6f6d5; }
+#module1 .btn-start:hover { background: var(--green); color: var(--white); }
+
+/* Module 2 (Purple Concept) */
+#module2 .badge { background: var(--purple-bg); color: var(--purple); border: 1px solid #e9d8fd; }
+#module2 .btn-start { background: var(--purple-bg); color: var(--purple); border: 1px solid #e9d8fd; }
+#module2 .btn-start:hover { background: var(--purple); color: var(--white); }
+
+/* --- Footer --- */
+footer { text-align: center; margin-top: 50px; padding: 20px 0; color: var(--muted); font-size: 0.85rem; border-top: 1px solid #edf2f7; }

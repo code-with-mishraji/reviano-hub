@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch-04: Tables & Multimedia — Reviano Hub</title>
+<link rel="stylesheet"href="chapter03.css">
+</head>
+<body>
+  
+<h1>Module 2: Interactivity & Media</h1>
+<h2>Chapter 04: Tables &amp; Multimedia 📊🎬</h2>
+
+<p>Namaste Developers! Ab tak humne text, links, aur navigation seekh liya। Lekin real-world websites mein sirf text nahi hota — data ko **organized rows-columns** mein dikhana padta hai (jaise pricing plans, comparison charts), aur websites mein **videos, audio, aur responsive images** bhi hoti hain।</p>
+
+<p>Is chapter mein hum HTML ke sabse "data-heavy" aur "media-heavy" tags ka **har ek edge case** cover karenge — bilkul production-level depth ke saath। Chalo shuru karte hain! 🚀</p>
+
+<hr>
+
+<h3>🎯 Chapter Roadmap</h3>
+<ol>
+  <li>HTML Tables Fundamentals &amp; Semantic Structure</li>
+  <li>Complex Table Layouts (Grid Merging with colspan &amp; rowspan)</li>
+  <li>The Video Element &amp; Deep Attributes</li>
+  <li>The Audio Element &amp; Web Formats</li>
+  <li>Modern Images &amp; Responsive Media</li>
+</ol>
+
+<hr>
+
+<h2>Pillar 1: HTML Tables Fundamentals &amp; Semantic Structure 📊</h2>
+
+<h3>Basic Structure — Table Ke 4 Core Tags</h3>
+
+<p>Table banane ke liye 4 tags ek saath kaam karte hain:</p>
+
+<pre>
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Name&lt;/th&gt;
+        &lt;th&gt;Age&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Rohan&lt;/td&gt;
+        &lt;td&gt;22&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Priya&lt;/td&gt;
+        &lt;td&gt;24&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+
+<ul>
+  <li><strong>&lt;table&gt;</strong> — Ye poori table ka **parent container** hai। Iske andar hi saara table-related content aata hai।</li>
+  <li><strong>&lt;tr&gt; (Table Row)</strong> — Ek **horizontal row** banata hai। Har naya <code>&lt;tr&gt;</code> matlab ek naya row।</li>
+  <li><strong>&lt;td&gt; (Table Data)</strong> — Ek **normal cell** banata hai jisme actual data hota hai (jaise "Rohan", "22")।</li>
+  <li><strong>&lt;th&gt; (Table Header)</strong> — Ek **header cell** banata hai (jaise column ka naam "Name", "Age")।</li>
+</ul>
+
+<p><strong>&lt;th&gt; automatically bold aur centered kyun dikhta hai?</strong></p>
+
+<p>Har browser ke paas ek **default built-in stylesheet** hoti hai (jise "User Agent Stylesheet" kehte hain), jisme <code>&lt;th&gt;</code> ke liye already ye rules likhe hue hain:</p>
+
+<pre>
+th {
+    font-weight: bold;
+    text-align: center;
+}
+</pre>
+
+<p>Isliye <code>&lt;th&gt;</code> automatically bold aur center-aligned dikhta hai, bina tumhare kuch CSS likhe hue — kyunki browser semantically samajhta hai ki ye ek "header" hai, normal data nahi, isliye use visually distinguish karta hai।</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> HTML Table bilkul **"Microsoft Excel Sheet"** jaisa concept hai! <code>&lt;table&gt;</code> poori spreadsheet hai, <code>&lt;tr&gt;</code> har horizontal row hai (Row 1, Row 2, Row 3...), aur <code>&lt;td&gt;</code>/<code>&lt;th&gt;</code> individual cells hain jaise Excel mein A1, B1, C1। Aur <code>&lt;th&gt;</code> exactly waisa hai jaise Excel mein tum apni **header row ko bold aur centered** karte ho taaki data se alag dikhe।</p>
+</blockquote>
+
+<p>⚠️ <strong>Common Mistake:</strong> Beginners kabhi kabhi <code>&lt;td&gt;</code> ko har jagah use karte hain, header row ke liye bhi — aur phir manually CSS se bold/center karte hain। Ye **semantically galat** hai! Agar koi cell **header** hai (matlab column/row ka naam batati hai), toh <code>&lt;th&gt;</code> use karo — isse screen readers ko pata chalta hai ki ye ek header hai, aur tumhe manual styling ki zaroorat bhi nahi padegi।</p>
+
+<h3>Semantic Tables — &lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;</h3>
+
+<p>Chhoti tables ke liye seedha <code>&lt;tr&gt;</code> likhna theek hai, lekin **professional, production-level tables** mein content ko 3 semantic groups mein baanta jaata hai:</p>
+
+<pre>
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Product&lt;/th&gt;
+            &lt;th&gt;Price&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Laptop&lt;/td&gt;
+            &lt;td&gt;₹50,000&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Mouse&lt;/td&gt;
+            &lt;td&gt;₹500&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+
+    &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Total&lt;/td&gt;
+            &lt;td&gt;₹50,500&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tfoot&gt;
+&lt;/table&gt;
+</pre>
+
+<ul>
+  <li><strong>&lt;thead&gt;</strong> — Table ka **header section** group karta hai (column names)।</li>
+  <li><strong>&lt;tbody&gt;</strong> — Table ka **main data (body)** group karta hai — actual rows of data।</li>
+  <li><strong>&lt;tfoot&gt;</strong> — Table ka **footer section** group karta hai (jaise totals, summaries)।</li>
+</ul>
+
+<p><strong>Ye kyun use karte hain? 3 Bade Fayde:</strong></p>
+
+<ol>
+  <li><strong>SEO:</strong> Search engines (Google) table ke structure ko better samajh paate hain jab ye semantic groups clearly diye gaye hon — isse Google ko pata chalta hai ki kaunsa data "header info" hai aur kaunsa "actual content", jo rich search results (jaise table snippets) mein help karta hai।</li>
+  <li><strong>Accessibility (Screen Readers):</strong> Jab koi visually-impaired user screen reader se table navigate karta hai, toh <code>&lt;thead&gt;</code> ki wajah se screen reader **"header row"** announce kar sakta hai jab user kisi bhi row par focus kare — jisse user ko baar-baar samajhna nahi padta ki kaunsa column kya represent karta hai।</li>
+  <li><strong>Printing Long Tables:</strong> Agar tumhari table bahut lambi hai aur multiple pages mein print ho rahi hai, toh browsers <code>&lt;thead&gt;</code> ko **har print page ke top par automatically repeat** kar sakte hain! Isse har printed page par header row dikhती rehti hai, chahe woh page 1 ho ya page 5 — user ko baar-baar upar scroll karke column names dekhne ki zaroorat nahi padti।</li>
+</ol>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Socho ek **lambi Excel report** jise tum print karte ho — agar report 10 pages ki hai, toh smart Excel settings har page ke top par **column headers repeat** karti hain, taaki page 7 dekhte waqt bhi tumhe pata rahe ki kaunsa column "Price" hai aur kaunsa "Quantity"। <code>&lt;thead&gt;</code> exactly yehi kaam karta hai HTML tables mein!</p>
+</blockquote>
+
+<p>💡 <strong>Pro-Tip:</strong> Even chhoti tables mein bhi <code>&lt;thead&gt;</code>/<code>&lt;tbody&gt;</code> use karna ek **good habit** hai, kyunki ye tumhare CSS ko bhi organize karne mein help karta hai — jaise tum easily <code>tbody tr:nth-child(even)</code> jaisा selector use karke alternate rows ko different color de sakte ho (zebra striping), jo <code>&lt;tbody&gt;</code> ke bina thoda mushkil ho jaata hai।</p>
+
+<h3>The &lt;caption&gt; Tag — Table Ka Title</h3>
+
+<p>Agar tumhe table ka ek proper **title/description** dena ho (jaise "Table 1: Monthly Sales Report"), toh <code>&lt;caption&gt;</code> tag use karo:</p>
+
+<pre>
+&lt;table&gt;
+    &lt;caption&gt;Monthly Sales Report — 2026&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Month&lt;/th&gt;
+            &lt;th&gt;Revenue&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;January&lt;/td&gt;
+            &lt;td&gt;₹2,00,000&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+
+<p><strong>Correct Placement Rule:</strong> <code>&lt;caption&gt;</code> ko hamesha <code>&lt;table&gt;</code> tag ke **immediately baad, sabse pehli child** ki tarah likhna chahiye — <code>&lt;thead&gt;</code> se bhi pehle! Ye HTML specification ka strict rule hai। Agar tum ise kahi aur likhoge (jaise <code>&lt;tbody&gt;</code> ke andar ya baad mein), toh browser use ignore ya galat render kar sakta hai।</p>
+
+<p>By default, <code>&lt;caption&gt;</code> table ke **top mein center-aligned** dikhta hai, aur ye screen readers ke liye bhi bahut useful hai — jab koi user table ko navigate karta hai, screen reader pehle caption announce karta hai, jisse user ko pata chal jaata hai ki ye table **kis baare mein** hai।
+
+<p>⚠️ <strong>Common Mistake:</strong> Log <code>&lt;caption&gt;</code> ki jagah table ke upar ek normal <code>&lt;h3&gt;</code> ya <code>&lt;p&gt;</code> likh dete hain। Ye kaam toh "visually" kar deta hai, lekin **semantic connection** miss ho jaata hai — screen readers ko pata nahi chalega ki ye heading specifically **isी table** ke liye hai। <code>&lt;caption&gt;</code> table ke andar hone ki wajah se programmatically table se juda hua rehta hai।</p>
+
+<hr>
+
+<h2>Pillar 2: Complex Table Layouts (Grid Merging) 🧩</h2>
+
+<p>Kabhi tumne dekha hoga ki table mein koi cell **normal se bada** hota hai — jaise ek cell 2 columns ki jagah le raha ho, ya 2 rows ki height cover kar raha ho। Ye <code>colspan</code> aur <code>rowspan</code> attributes se hota hai।</p>
+
+<h3>The colspan Attribute — Columns Ko Horizontally Merge Karna</h3>
+
+<p><code>colspan</code> ek cell ko **multiple columns tak horizontally phaila** deta hai। Isse samajhne ke liye ek grid example lete hain:</p>
+
+<pre>
+&lt;table border="1"&gt;
+    &lt;tr&gt;
+        &lt;th colspan="2"&gt;Contact Info&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Email&lt;/td&gt;
+        &lt;td&gt;Phone&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+
+<p><strong>Iska Visual Grid Kaisa Banega?</strong></p>
+
+<pre>
+Row 1:  [   Contact Info (spans 2 cols)   ]
+Row 2:  [    Email     ]  [    Phone      ]
+</pre>
+
+<p>Yahan pehli row mein sirf **ek** <code>&lt;th&gt;</code> likha gaya hai, lekin uska <code>colspan="2"</code> hone ki wajah se woh **2 columns ki poori width** le lega — jitni width Row 2 ke dono cells (Email + Phone) milke lete hain। Isliye Row 1 mein tumhe **doosra <code>&lt;th&gt;</code> likhne ki zaroorat nahi** — browser automatically samajh jaata hai ki pehla wala hi 2 columns cover kar raha hai।</p>
+<h3>The rowspan Attribute — Rows Ko Vertically Merge Karna</h3>
+
+<p><code>rowspan</code> ek cell ko **multiple rows tak vertically phaila** deta hai:</p>
+
+<pre>
+&lt;table border="1"&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Name&lt;/th&gt;
+        &lt;th&gt;Department&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td rowspan="2"&gt;Rohan&lt;/td&gt;
+        &lt;td&gt;Engineering&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Design&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+
+<p><strong>Iska Visual Grid Kaisa Banega?</strong></p>
+
+<pre>
+Row 1:  [   Name   ]  [  Department   ]
+Row 2:  [          ]  [ Engineering   ]
+        [  Rohan   ]
+        [(spans 2  ]  [   Design      ]
+        [  rows)   ]
+Row 3:  [          ]
+</pre>
+
+<p>Yahan "Rohan" wala cell Row 2 aur Row 3 dono ki height cover kar leta hai। Isliye Row 3 mein tumhe **"Name" column ke liye naya <code>&lt;td&gt;</code> likhne ki zaroorat nahi** — sirf "Design" wala <code>&lt;td&gt;</code> likha gaya hai, jo automatically Row 3 ke second column mein slot ho jaata hai।</p>
+
+<h3>Browser Rendering Ka Math &amp; Logic — Kaise Push Hote Hain Baaki Cells?</h3>
+
+<p>Ye samajhna **bahut zaroori** hai: Jab browser HTML parse karta hai, toh ye ek **invisible grid** ko row-by-row, left-to-right fill karta hai।</p>
+
+<ul>
+  <li>Jab browser ek <code>colspan="2"</code> wala cell dekhta hai, woh us row mein **2 grid-slots occupy** kar leta hai (na ki 1)। Isliye us row mein agla <code>&lt;td&gt;</code> automatically 2 slots aage se start hota hai।</li>
+  <li>Jab browser ek <code>rowspan="2"</code> wala cell dekhta hai, woh **current row + next row**, dono mein us column-position ko "already filled" maan leta hai। Isliye next row mein jab browser naye <code>&lt;td&gt;</code> ko place karta hai, woh us occupied slot ko **automatically skip** karke aage wale available slot mein place karta hai।</li>
+</ul>
+
+<p>Isliye **golden rule** yaad rakho: Jab kisi cell mein <code>rowspan</code> lagate ho, toh **next row(s) mein us column ke liye ek kam <code>&lt;td&gt;</code> likhna padega** (kyunki wo slot already "occupied" hai upar wale rowspan cell se)।</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Socho ek **Movie Theatre Seating Chart** — normally har seat ek insaan ke liye hoti hai (1 cell = 1 seat)। Lekin agar koi group VIP couple-seats book karte hain jo 2 normal seats jitni jagah leti hain (colspan jaisा), toh us row mein baaki logon ko 2 seats "skip" karke apni seat number find karni padegi। Rowspan waisा hai jaise ek "Reclining Sofa Seat" jo neeche wali row ki jagah bhi cover kar leta hai — us jagah neeche koi doosri seat book nahi ho sakti।</p>
+</blockquote>
+
+<p>⚠️ <strong>Common Mistake:</strong> Sabse common aur frustrating mistake hai jab developers <code>colspan</code>/<code>rowspan</code> use karte waqt **grid ka math galat calculate** karte hain — matlab total columns/rows count match nahi hoti। Chalo ek broken example dekhते hain:</p>
+
+<pre>
+&lt;!-- ❌ GALAT: Grid Math Match Nahi Ho Rahi --&gt;
+&lt;table border="1"&gt;
+    &lt;tr&gt;
+        &lt;th colspan="2"&gt;Header&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;A&lt;/td&gt;
+        &lt;td&gt;B&lt;/td&gt;
+        &lt;td&gt;C&lt;/td&gt;  &lt;!-- Extra cell! Header sirf 2 columns cover karta hai, lekin yahan 3 cells hain --&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+
+<p>Yahan Row 1 sirf **2 columns** ki width define kar rahi hai (<code>colspan="2"</code>), lekin Row 2 mein **3 cells** (A, B, C) hain! Isse table ka structure **misaligned/broken** ho jaayega — columns properly align nahi honge, aur visually table "tuti-phuti" dikhegi, kyunki browser confuse ho jaata hai ki actual grid width kya honi chahiye।</p>
+
+<p>💡 <strong>Pro-Tip:</strong> Complex tables banane se pehle, hamesha **pehle paper par ya mentally grid draw karo** — kitne total columns hain, kaunse cells merge honge — phir code likho। Isse colspan/rowspan ki galtiyan bahut kam ho jaati hain। Browser DevTools mein table ko inspect karke bhi tum dekh sakte ho ki actual rendered grid kaisa bana hai।</p>
+
+<hr>
+
+<h2>Pillar 3: The Video Element (&lt;video&gt;) &amp; Deep Attributes 🎬</h2>
+
+<h3>Basic Setup — &lt;source&gt; Tag Kyun Better Hai Inline src Se</h3>
+
+<p>Video embed karne ke 2 tarike hain:</p>
+
+<pre>
+&lt;!-- Method 1: Inline src (Simple, lekin limited) --&gt;
+&lt;video src="movie.mp4" controls&gt;&lt;/video&gt;
+
+&lt;!-- Method 2: &lt;source&gt; tags (Recommended, Production-Ready) --&gt;
+&lt;video controls&gt;
+    &lt;source src="movie.mp4" type="video/mp4"&gt;
+    &lt;source src="movie.webm" type="video/webm"&gt;
+    &lt;source src="movie.ogg" type="video/ogg"&gt;
+    Your browser does not support the video tag.
+&lt;/video&gt;
+</pre>
+
+<p><strong>&lt;source&gt; Method Kyun Better Hai?</strong></p>
+
+<p>Problem ye hai ki **har browser har video format support nahi karta** — kuch purane browsers <code>.mp4</code> support karte hain lekin <code>.webm</code> nahi, ya vice-versa। Agar tum sirf ek inline <code>src</code> doge (jaise sirf <code>.mp4</code>), aur user ka browser use support nahi karta, toh video **bilkul nahi chalega**।</p>
+
+<p><code>&lt;source&gt;</code> tags ka use karke tum **multiple format options** de sakte ho। Browser top se bottom **saare <code>&lt;source&gt;</code> tags check karta hai**, aur jo **pehla compatible format** milta hai, wahi use karta hai। Isse cross-browser compatibility guarantee hoti hai — agar pehla format kaam nahi karta, browser automatically doosra try karega!</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Ye ek "Multi-Language Menu" jaisा hai jo restaurant customer ko deta hai — Menu mein English, Hindi, aur Regional language, teeno mein items likhe hote hain। Customer (browser) apni **samajh ke hisaab se** jo language usse aati hai, wahi read karta hai। Agar sirf ek language hoti (sirf ek <code>src</code>), toh jo customer wo language nahi samajhta, use kuch samajh hi nahi aata।</p>
+</blockquote>
+
+<h3>Core Attributes Deep-Dive</h3>
+
+<p><strong>controls</strong> — Ye attribute video par **default browser controls** dikhata hai (play/pause button, volume slider, progress bar, fullscreen button)। Bina isके, video dikhta toh hai lekin user ke paas use control karne ka koi built-in tarika nahi hota (custom JS controls banane hon toh alag baat hai)।</p>
+
+<pre>&lt;video controls&gt;...&lt;/video&gt;</pre>
+
+<p><strong>autoplay</strong> — Ye video ko page load hote hi **automatically play** karne ki koshish karta hai।</p>
+
+<pre>&lt;video autoplay&gt;...&lt;/video&gt;</pre>
+
+<p>⚠️ <strong>Bahut Zaroori Baat:</strong> Modern browsers (Chrome, Firefox, Safari) ne **autoplay policy** implement ki hai — agar video mein **audio hai**, toh <code>autoplay</code> tab tak kaam nahi karega jab tak tum saath mein <code>muted</code> attribute bhi na do! Ye policy isliye banayi gayi kyunki users ko random websites par achanak loud sound se annoy hone se bachana tha।</p>
+
+<pre>
+&lt;!-- ❌ Ye kaam nahi karega (audio ke saath autoplay blocked hoga) --&gt;
+&lt;video autoplay controls&gt;...&lt;/video&gt;
+
+&lt;!-- ✅ Ye kaam karega (muted hone ki wajah se autoplay allowed hai) --&gt;
+&lt;video autoplay muted controls&gt;...&lt;/video&gt;
+</pre>
+
+<p><strong>loop</strong> — Video khatam hone ke baad **automatically restart** ho jaata hai, continuously repeat karta rehta hai।</p>
+
+<pre>&lt;video loop&gt;...&lt;/video&gt;</pre>
+
+<p><strong>poster</strong> — Video load hone se pehle (ya play hone se pehle) jo **thumbnail image** dikhani hai, use set karta hai:</p>
+
+<pre>
+&lt;video controls poster="thumbnail.jpg"&gt;
+    &lt;source src="movie.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+</pre>
+
+<p>Bina <code>poster</code> ke, browser generally video ka **pehla frame** dikhata hai (ya ek blank black screen), jo hamesha visually appealing nahi hota। <code>poster</code> attribute se tum ek professionally designed thumbnail (jisme play-button ka overlay bhi ho sakta hai) set kar sakte ho।</p>
+
+<p><strong>preload</strong> — Ye batata hai ki page load hote waqt video data **kitna pehle se download** kiya jaaye, chahe user ne play button abhi tak click na kiya ho:</p>
+
+<table border="1" cellpadding="8">
+  <tr><th>Value</th><th>Kya Karta Hai</th></tr>
+  <tr><td><code>none</code></td><td>Video ka koi bhi data preload nahi hota — sirf jab user play dabaye, tabhi loading start hoti hai। Data-saving ke liye best (jaise mobile users ke liye jinke paas limited data plan hai)।</td></tr>
+  <tr><td><code>metadata</code></td><td>Sirf video ki basic information (duration, dimensions, pehla frame) preload hoti hai, actual video content nahi। Ye default-ish balanced choice hai।</td></tr>
+  <tr><td><code>auto</code></td><td>Browser ko poori freedom hai — woh poora video (ya jitna zyada se zyada possible ho) preload kar sakta hai, taaki jab user play dabaye, video instantly bina buffering ke chale।</td></tr>
+</table>
+
+<pre>&lt;video controls preload="metadata"&gt;...&lt;/video&gt;</pre>
+
+<p>💡 <strong>Pro-Tip:</strong> Agar tumhari website mein bahut saari videos hain (jaise ek video-gallery page), toh <code>preload="none"</code> use karo taaki page load fast rahe aur users ka data bhi bache — user jab specific video par click karega, tabhi uski loading start hogi।</p>
+
+<h3>Video Subtitles — The &lt;track&gt; Tag</h3>
+
+<p>Agar tumhe apni video mein **subtitles ya captions** add karni hain (jo accessibility ke liye bhi bahut important hai — deaf/hard-of-hearing users ke liye, aur different language speakers ke liye), toh <code>&lt;track&gt;</code> tag use karo:</p>
+
+<pre>
+&lt;video controls&gt;
+    &lt;source src="movie.mp4" type="video/mp4"&gt;
+    &lt;track 
+        kind="subtitles" 
+        src="subtitles-en.vtt" 
+        srclang="en" 
+        label="English" 
+        default&gt;
+    &lt;track 
+        kind="subtitles" 
+        src="subtitles-hi.vtt" 
+        srclang="hi" 
+        label="Hindi"&gt;
+&lt;/video&gt;
+</pre>
+
+<ul>
+  <li><strong>kind="subtitles"</strong> — Batata hai ki ye track "subtitles" ke liye hai (doosri values bhi hoti hain jaise <code>captions</code>, <code>descriptions</code>, <code>chapters</code>)।</li>
+  <li><strong>src="subtitles-en.vtt"</strong> — Woh file jisme actual subtitle text aur timing information hoti hai (<code>.vtt</code> format mein)।</li>
+  <li><strong>srclang="en"</strong> — Batata hai ye subtitles kis language mein hain (English)।</li>
+  <li><strong>label="English"</strong> — User ko dikhने wala friendly naam jab woh subtitle options mein se choose karega।</li>
+  <li><strong>default</strong> — Ye batata hai ki agar multiple <code>&lt;track&gt;</code> hon, toh **kaunsa track by default active** rahega (jab tak user manually na badle)।</li>
+</ul>
+
+<p><strong>.vtt Files Kaise Kaam Karti Hain?</strong></p>
+
+<p><code>.vtt</code> (WebVTT — Web Video Text Tracks) ek simple text-format file hai jisme timestamps ke saath text likha jaata hai:</p>
+
+<pre>
+WEBVTT
+
+00:00:01.000 --&gt; 00:00:04.000
+Namaste! Welcome to Reviano Hub.
+
+00:00:05.000 --&gt; 00:00:08.000
+Aaj hum HTML Tables seekhenge.
+</pre>
+
+<p>Browser is file ko parse karta hai aur video play hote waqt exact timestamp par exact text ko subtitle ki tarah screen par overlay kar deta hai।</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> <code>&lt;track&gt;</code> tag ek **"Movie Theatre ke Subtitle Screen"** jaisा hai jo kuch international film festivals mein hota hai — movie apni original language mein chalti hai, lekin neeche ek alag screen par timed translation dikhti rehti hai। <code>.vtt</code> file wo "script" hai jo batati hai kaunsa text kis exact second par dikhna chahiye।</p>
+</blockquote>
+
+<p>⚠️ <strong>Common Mistake:</strong> Bahut developers <code>autoplay</code> lagane ke baad bhool jaate hain ki mobile devices (especially iOS Safari) mein autoplay policies **desktop se bhi zyada strict** hain — kabhi kabhi <code>muted</code> ke saath bhi autoplay work nahi karta jab tak <code>playsinline</code> attribute bhi na diya jaaye (taaki video inline play ho, automatically fullscreen na ho jaaye)। Mobile-heavy websites banate waqt hamesha real devices par test karo!</p>
+
+<hr>
+
+<h2>Pillar 4: The Audio Element (&lt;audio&gt;) &amp; Web Formats 🎵</h2>
+
+<h3>Basic Structure &amp; Core Attributes</h3>
+
+<p><code>&lt;audio&gt;</code> tag <code>&lt;video&gt;</code> jaisा hi kaam karta hai, bas isme visual video frame nahi hota — sirf audio player controls dikhte hain:</p>
+
+<pre>
+&lt;audio controls&gt;
+    &lt;source src="song.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;
+</pre>
+
+<p>Core attributes bhi almost same hain jaise video mein:</p>
+
+<ul>
+  <li><strong>controls</strong> — Play/pause button, volume, progress bar dikhata hai।</li>
+  <li><strong>autoplay</strong> — Audio ko page load hote hi play karne ki koshish karta hai (yahan bhi modern browsers strict policies follow karte hain — bina user interaction ke autoplay generally block ho jaata hai, chahe muted ho ya na ho, kyunki audio-only content ke liye policies aur bhi strict hain)।</li>
+  <li><strong>loop</strong> — Audio khatam hone ke baad automatically restart hota hai।</li>
+  <li><strong>muted</strong> — Audio ko by default **mute** kar deta hai (user ko manually unmute karna padega)।</li>
+</ul>
+
+<pre>&lt;audio controls loop muted&gt;...&lt;/audio&gt;</pre>
+
+<h3>Browser Fallbacks — Multiple Formats (MP3, OGG, WAV)</h3>
+
+<p>Jaise video mein, audio mein bhi different browsers different formats support karte hain। Isliye multiple <code>&lt;source&gt;</code> dena best practice hai:</p>
+
+<pre>
+&lt;audio controls&gt;
+    &lt;source src="podcast.mp3" type="audio/mpeg"&gt;
+    &lt;source src="podcast.ogg" type="audio/ogg"&gt;
+    &lt;source src="podcast.wav" type="audio/wav"&gt;
+    Your browser does not support the audio element.
+&lt;/audio&gt;
+</pre>
+
+<ul>
+  <li><strong>MP3 (audio/mpeg):</strong> Sabse universally supported format — almost har modern browser isko support karta hai। Compressed, chhoti file size, decent quality — general web use ke liye best choice।</li>
+  <li><strong>OGG (audio/ogg):</strong> Open-source format, kuch purane Firefox/Chrome versions ke liye fallback ke taur par use hota tha jab MP3 licensing issues the (aajkal MP3 patent-free hai, isliye OGG ki zaroorat kam ho gayi hai, lekin fir bhi legacy support ke liye rakha jaata hai)।</li>
+  <li><strong>WAV (audio/wav):</strong> Uncompressed, **bahut high quality** lekin **bahut badi file size**। General web streaming ke liye impractical hai (slow loading), lekin professional audio-editing tools ya short sound-effects ke liye use hota hai।</li>
+</ul>
+
+<p><strong>Fallback Text Kaise Kaam Karta Hai?</strong></p>
+
+<p><code>&lt;audio&gt;</code> tag ke andar jo text tum <code>&lt;source&gt;</code> tags ke **baad** likhते ho, wo un **"ancient" browsers** ke liye hai jo <code>&lt;audio&gt;</code> tag ko bilkul samajhते hi nahi (jaise Internet Explorer 8 aur usse purane versions)। Aise browsers <code>&lt;audio&gt;</code> tag ko completely ignore kar dete hain aur seedha uske andar likha gaya **plain text content** dikha dete hain — jisse user ko pata chal jaata hai ki uska browser outdated hai।</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Multiple audio formats dena aisा hai jaise koi restaurant apna menu **3 different formats** mein print kare — QR code (digital, modern), printed paper menu (traditional), aur agar dono na chalein, toh waiter verbally bata de (fallback text)। Har customer (browser) apni capability ke hisaab se **best available option** use karta hai।</p>
+</blockquote>
+
+<p>💡 <strong>Pro-Tip:</strong> Aaj ke modern web mein (2026 tak), sirf **MP3** dena bhi generally kaafi hota hai kyunki isकी support almost universal hai। Lekin agar tum **maximum compatibility** chahte ho (jaise old enterprise systems ya legacy browsers support karna ho), toh MP3 + OGG combo safe choice hai।</p>
+
+<hr>
+
+<h2>Pillar 5: Modern Images &amp; Responsive Media 🖼️</h2>
+
+<h3>&lt;img&gt; Tag Recap — Essential Attributes</h3>
+
+<pre>
+&lt;img src="cat.jpg" alt="A fluffy orange cat sitting on a windowsill" width="400" height="300"&gt;
+</pre>
+
+<ul>
+  <li><strong>src</strong> — Image file ka path/URL।</li>
+  <li><strong>alt</strong> — **Alternative text** jo image ko describe karta hai।</li>
+  <li><strong>width / height</strong> — Image ka display size pixels mein।</li>
+</ul>
+
+<p><strong>alt Attribute Ki Importance — SEO &amp; Accessibility Dono Ke Liye:</strong></p>
+
+<ol>
+  <li><strong>Accessibility:</strong> Screen readers (visually-impaired users ke liye) <code>alt</code> text ko **loudly read out** karte hain, taaki blind users bhi samajh sakein image mein kya hai। Bina <code>alt</code> ke, screen reader sirf "image" bol dega, jo koi useful information nahi deta।</li>
+  <li><strong>SEO:</strong> Google **images ko "dekh" nahi sakta** jaise humans dekhte hain — woh <code>alt</code> text padh ke samajhta hai image kis baare mein hai। Isse tumhari images **Google Image Search** mein rank kar sakti hain, jo extra traffic laa sakta hai।</li>
+  <li><strong>Broken Image Fallback:</strong> Agar kisi wajah se image load nahi ho paati (galat path, slow internet, server down), toh browser <code>alt</code> text ko image ki jagah **display** kar deta hai, taaki user ko pata chale wahan kya hona chahiye tha।</li>
+</ol>
+
+<p>⚠️ <strong>Common Mistake:</strong> Log <code>alt=""</code> khali chhod dete hain ya keyword-stuffing karte hain (jaise <code>alt="cat cat cats cute cat buy cat food"</code> — SEO manipulate karne ki koshish)। Ye dono galat practices hain — <code>alt</code> text **natural, descriptive, aur genuine** hona chahiye, jaise <code>alt="An orange tabby cat stretching on a wooden windowsill"</code>।</p>
+
+<h3>Performance Optimization — loading="lazy"</h3>
+
+<p>Agar tumhari webpage mein **bahut saari images** hain (jaise ek e-commerce product listing page, ya photo gallery), toh sab images ko **ek saath load** karna page ko slow bana deta hai — chahe user ne scroll karke unhe dekha bhi na ho!</p>
+
+<pre>
+&lt;img src="product.jpg" alt="Product photo" loading="lazy"&gt;
+</pre>
+
+<p><code>loading="lazy"</code> browser ko batata hai: "Is image ko **turant load mat karo** — sirf tab load karo jab user scroll karke is image ke **near** pahunch jaaye।" Isse initial page load bahut fast hota hai, kyunki browser sirf woh images pehle load karta hai jo **immediately visible** hain (viewport ke andar), aur baaki images "lazy" (der se, jab zaroorat ho) load hoti hain।</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Lazy Loading ek **"Buffet System"** jaisा hai jaha waiters saara khaana pehle se plate mein nahi sajate — jab tum ek dish ke paas pahunchte ho, tabhi woh dish serve hoti hai। Isse kitchen (server/browser) ka load kam hota hai, aur tumhe bhi turant relevant khaana milta hai bina lamba wait kiye pura buffet spread hone ka।</p>
+</blockquote>
+
+<p>💡 <strong>Pro-Tip:</strong> <code>loading="lazy"</code> sirf un images par lagao jo **page ke neeche** (fold ke baad) hain। Website ke **sabse upar** wali important image (jaise hero banner) ko lazy-load mat karo — usko turant load hona chahiye kyunki user page open karte hi use dekhega। Isके liye <code>loading="eager"</code> (default behavior) rakho ya attribute hi mat likho।</p>
+
+<h3>The &lt;picture&gt; Element — Modern Responsive Images</h3>
+
+<p>Ab tak humne ek hi image ko "chhota-bada" dikhane ki baat ki hai (jo CSS se hoti hai)। Lekin kabhi tumhe chahiye hota hai ki **completely different image** dikhaye jaaye based on screen size — isko **"Art Direction Problem"** kehte hain। Jaise, mobile par ek **zoomed-in, cropped** version ho, aur desktop par **wide, full-scene** version ho।</p>
+
+<p><code>&lt;picture&gt;</code> element ye problem **bina JavaScript ke** solve karta hai:</p>
+
+<pre>
+&lt;picture&gt;
+    &lt;source media="(min-width: 1024px)" srcset="banner-desktop.jpg"&gt;
+    &lt;source media="(min-width: 600px)" srcset="banner-tablet.jpg"&gt;
+    &lt;img src="banner-mobile.jpg" alt="Reviano Hub Banner"&gt;
+&lt;/picture&gt;
+</pre>
+
+<p><strong>Ye Kaise Kaam Karta Hai?</strong></p>
+
+<ul>
+  <li>Browser **top se bottom** har <code>&lt;source&gt;</code> ki <code>media</code> condition ko check karta hai।</li>
+  <li>Jaise hi koi condition **match** karti hai (jaise screen width <code>1024px</code> ya usse zyada hai), browser **usी <code>&lt;source&gt;</code> ka <code>srcset</code>** use karke image load karta hai, aur baaki sources ko ignore kar deta hai।</li>
+  <li>Agar **koi bhi** <code>&lt;source&gt;</code> match nahi karta, toh browser **fallback** ki tarah andar wale <code>&lt;img&gt;</code> tag ka <code>src</code> use karta hai। Isliye <code>&lt;img&gt;</code> tag hamesha **sabse aakhir mein** likhna zaroori hai — ye **mandatory fallback** hai, kabhi bhi <code>&lt;picture&gt;</code> ke andar sirf <code>&lt;source&gt;</code> tags nahi ho sakte, ek <code>&lt;img&gt;</code> hona hi chahiye।</li>
+</ul>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Socho tumhare paas ek **hi painting ke 3 alag versions** hain — ek bahut bade canvas par (wide detailed view), ek medium canvas par, aur ek chhote canvas par (sirf main subject, zoomed-in)। Depending on **room ka size** (screen width), tum decide karte ho **kaunsa canvas size fit hoga** — bade hall mein bada canvas achha lagega, lekin chhoti room mein wahi bada canvas overwhelming/wasteful hoga, wahan chhota, focused canvas better hai। <code>&lt;picture&gt;</code> element exactly yehi decision automatically browser ko lene deta hai!</p>
+</blockquote>
+
+<p>💡 <strong>Pro-Tip:</strong> <code>&lt;picture&gt;</code> element sirf "art direction" (different crop/composition) ke liye hai। Agar tumhe sirf **same image ke different resolutions** deni hain (jaise high-res retina screens ke liye sharper image, bina composition change kiye), toh iske liye <code>&lt;img&gt;</code> tag ka **<code>srcset</code> aur <code>sizes</code> attribute** zyada appropriate hota hai — ye ek related lekin thoda different concept hai jise hum future chapters mein deeply explore karenge!</p>
+
+<p>⚠️ <strong>Common Mistake:</strong> Beginners <code>&lt;picture&gt;</code> element ke andar <code>&lt;img&gt;</code> tag ko **bhool jaate hain**, ya use bhi <code>&lt;source&gt;</code> jaisा treat karte hain। Yaad rakho — <code>&lt;picture&gt;</code> ke andar sirf **ek hi <code>&lt;img&gt;</code>** hoga (jo fallback ka kaam karta hai), aur woh hamesha **sabse aakhir** mein hoga, chahe kitne bhi <code>&lt;source&gt;</code> tags ho।</p>
+
+<hr>
+
+<h2>🎓 Chapter Summary — Ek Nazar Mein</h2>
+
+<ol>
+  <li><strong>Tables</strong> ke core tags &lt;table&gt;, &lt;tr&gt;, &lt;td&gt;, &lt;th&gt; hain — aur professional tables mein &lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt; use karo SEO, accessibility, aur print-friendliness ke liye, saath mein &lt;caption&gt; se table ka title do।</li>
+  <li><strong>colspan</strong> columns ko horizontally merge karta hai, <strong>rowspan</strong> rows ko vertically merge karta hai — dono ke count grid ke math se exactly match hone chahiye, warna table misaligned ho jaayegi।</li>
+  <li><strong>&lt;video&gt;</strong> tag mein &lt;source&gt; tags multiple format fallback dete hain — controls, loop, poster, aur preload attributes deep customization dete hain, aur autoplay ke liye muted mandatory hai।</li>
+  <li><strong>&lt;audio&gt;</strong> tag video jaisा hi hai bas visual frame ke bina — MP3/OGG/WAV multiple sources compatibility ensure karte hain।</li>
+  <li><strong>Images</strong> mein alt text SEO/accessibility ke liye critical hai, loading="lazy" performance boost deta hai, aur &lt;picture&gt; element art-direction problem ko bina JavaScript ke solve karta hai।</li>
+</ol>
+
+<p>Bhai, ye chapter thoda lamba tha, lekin ab tumhe **data tables aur multimedia** ka har technical detail pata hai — jo real-world production websites banane ke liye must-know skills hain!</p>
+
+<p><strong>Chalo, Chapter 05 ki taraf badhte hain! 🚀</strong></p>
+
+<hr>
+<div class="footer-navigation">
+    <a href="Html.html" class="back-dashboard-btn">← Back to Dashboard</a>
+
+</body>
+</html>

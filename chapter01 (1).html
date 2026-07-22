@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch-01: Welcome to the Web — Reviano Hub</title>
+ <link rel="stylesheet"href="chapter01.css">
+</head>
+<body>
+<h1>Module 1: Core Foundations</h1>
+<h2>Chapter 01: Welcome to the Web</h2>
+
+<p>Namaste Developers! Welcome to <strong>Reviano Hub - The Ultimate HTML Treasure</strong>! 🎉</p>
+
+<p>Dekho, jab bhi koi naya bandha coding seekhna start karta hai, seedha <code>&lt;h1&gt;Hello World&lt;/h1&gt;</code> likhne baith jaata hai. Lekin bhai, ye bahut badi galti hai! Agar tumhe ek pakka (rock-solid) developer banna hai, na ki sirf code copy-paste karne wala, toh tumhe pehle ye samajhna padega ki jab tum browser mein ek website kholte ho, tab parde ke peeche (behind the scenes) kya hota hai.</p>
+
+<p>Isliye is chapter mein hum koi code nahi likhenge. Aaj hum "Web ka Constitution" padhenge — matlab woh fundamental rules jo pura Internet aur Web chalate hain. Chai/Coffee uthao, aaram se baitho, kyunki ye chapter chota nahi hai — ye extremely deep hai. 🍵</p>
+
+<p>Chalo shuru karte hain!</p>
+
+<hr>
+
+<h3>🎯 Chapter Roadmap</h3>
+<ol>
+  <li>Internet vs WWW (Physical Infrastructure)</li>
+  <li>Internet kaam kaise karta hai (IP, Packets, Routers, DNS)</li>
+  <li>Client-Server Architecture (HTTP Request/Response Lifecycle)</li>
+  <li>Browser Rendering (Code se Screen tak ka safar)</li>
+</ol>
+
+<hr>
+
+<h2>Pillar 1: Internet vs World Wide Web (WWW) 🌍</h2>
+
+<p>Ye sabse common confusion hai jo 90% beginners ko hoti hai — log sochte hain "Internet" aur "Web" same cheez hai. Bhai, ye bilkul alag cheezein hain! Chalo isko tod ke samjhte hain.</p>
+
+<h3>Internet Kya Hai? (The Physical Highway)</h3>
+
+<p><strong>Internet</strong> ek <strong>hardware infrastructure</strong> hai — matlab ye ek giant global network of interconnected computers hai jo poori duniya mein bikhra hua hai. Isko tum ek "Highway System" samajh sakte ho jo har sheher, har desh ko connect karta hai.</p>
+
+<p>Iske physical components kya hain?</p>
+<ul>
+  <li><strong>Undersea Fiber Optic Cables:</strong> Ji haan, tumhe pata hai ki jab tum India se USA ke server ka data access karte ho, tab woh data literally samundar ke neeche bichi hui cables (jinhe "submarine cables" kehte hain) se travel karta hai! Ye cables hazaaron kilometers lambi hoti hain aur poore continents ko connect karti hain.</li>
+  <li><strong>Data Centers:</strong> Ye woh massive warehouses hote hain jinme hazaaron servers rakhe hote hain — jo websites, videos, aur data ko store karte hain (jaise Google, Amazon, Netflix ke data centers).</li>
+  <li><strong>Routers &amp; Switches:</strong> Ye traffic police ki tarah data ko sahi raste par bhejte hain.</li>
+  <li><strong>ISPs (Internet Service Providers):</strong> Jio, Airtel, BSNL — inhi ke through tumhara ghar ka Wi-Fi is global highway se connect hota hai.</li>
+</ul>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Internet ek "Road Network" hai — poore desh mein bichi hui roads, highways, aur pull (bridges). Ye sirf ek raasta hai jisse cheezein ek jagah se doosri jagah tak travel kar sakti hain.</p>
+</blockquote>
+
+<h3>WWW (World Wide Web) Kya Hai? (The Service That Runs On It)</h3>
+
+<p><strong>Web</strong> ek <strong>hardware nahi hai</strong> — ye ek software/service layer hai jo Internet ke upar chalti hai. WWW ek system hai jisme documents (webpages) hote hain jo hyperlinks ke through ek-doosre se connected hote hain, aur jinhe hum HTTP protocol ke through access karte hain.</p>
+<ul>
+  <li>Web = Websites + Webpages + Hyperlinks + Browsers</li>
+  <li>Ye 1989 mein <strong>Tim Berners-Lee</strong> ne invent kiya tha (CERN mein).</li>
+</ul>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Agar Internet "Road Network" hai, toh WWW us road par chalne wali "Courier/Delivery Service" (jaise ki Zomato ya Swiggy) hai. Road (Internet) pehle se hi maujood thi, lekin Web ne us road ka use karke ek specific service banayi — documents ko ek jagah se doosri jagah tak deliver karna.</p>
+</blockquote>
+
+<h3>Internet ke Doosre Services (Web Iska Sirf Ek Part Hai)</h3>
+
+<p>Log bhool jaate hain ki Internet ka use sirf websites dekhne ke liye nahi hota. Internet ke upar aur bhi services chalti hain:</p>
+<ul>
+  <li><strong>Email</strong> (SMTP protocol) — jaise Gmail</li>
+  <li><strong>File Transfer</strong> (FTP protocol)</li>
+  <li><strong>Online Gaming</strong> (custom protocols)</li>
+  <li><strong>Video Calling</strong> (jaise Zoom, WhatsApp calls)</li>
+  <li><strong>WWW</strong> (HTTP/HTTPS protocol) — ye sirf ek service hai jo Internet provide karta hai!</li>
+</ul>
+
+<pre>
+INTERNET (The Highway)
+   ├── Email Service (SMTP)
+   ├── File Transfer (FTP)
+   ├── Video Calls (RTP/WebRTC)
+   └── World Wide Web (HTTP/HTTPS)  &lt;-- Hum yahan focus karenge
+</pre>
+
+<p>💡 <strong>Pro-Tip:</strong> Interview mein agar koi puche "Internet aur Web mein farak batao", toh seedha bol do: <em>"Internet ek network of networks hai (infrastructure), aur Web is network ke upar chalne wali ek service hai jo hyperlinked documents deliver karti hai via HTTP."</em> Isse interviewer ko lagega tumhari foundation strong hai!</p>
+
+<p>⚠️ <strong>Common Mistake:</strong> Bahut log bolte hain "Web browser se hum Internet chala rahe hain." Ye galat hai! Tum Browser se Web access kar rahe ho, jo Internet ke upar chal rahi hai. Jab tum WhatsApp use karte ho, tab bhi tum Internet use kar rahe ho, lekin Web nahi (kyunki WhatsApp apna alag protocol use karta hai, HTTP nahi).</p>
+
+<hr>
+
+<h2>Pillar 2: Internet Kaam Kaise Karta Hai? (The Engine Room) ⚙️</h2>
+
+<p>Chalo ab dekhte hain ki jab tum browser mein <code>google.com</code> type karte ho, tab peeche kya hota hai. Isko samajhne ke liye humein 4 concepts clear karne honge: IP Address, Packets, Routers, aur DNS.</p>
+
+<h3>1️⃣ IP Address — Har Device Ka Ghar Ka Pata</h3>
+
+<p>Har device jo Internet se connected hai (tumhara phone, laptop, ya woh server jahan Google ki website hosted hai), uska ek unique address hota hai jise <strong>IP Address (Internet Protocol Address)</strong> kehte hain.</p>
+
+<pre>
+Example IPv4 Address: 142.250.183.100
+Example IPv6 Address: 2404:6800:4009:826::2004
+</pre>
+
+<ul>
+  <li><strong>IPv4:</strong> 4 numbers ka combination (0-255), jaise <code>192.168.1.1</code>. Isse total 4.3 billion unique addresses ban sakte hain — jo aaj ki duniya ke liye kam pad gaye!</li>
+  <li><strong>IPv6:</strong> Isliye naya system aaya jisme itne zyada addresses hain ki har grain of sand ko bhi apna alag IP mil sakta hai.</li>
+</ul>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> IP Address ek "Ghar ka Pata (Home Address)" hai. Jaise tumhare ghar ka ek unique pincode + address hota hai jisse courier wala tumhare ghar tak pahunch sakta hai, waise hi har device ka IP address use karke data us tak pahunch sakta hai.</p>
+</blockquote>
+
+<h3>2️⃣ Packets — Data Ke Chote Tukde</h3>
+
+<p>Jab tum ek webpage request karte ho, tab data ek saath nahi bheja jaata. Data ko chote-chote tukdon mein tod diya jaata hai jise <strong>Packets</strong> kehte hain.</p>
+<ul>
+  <li>Har packet mein actual data (payload) hota hai + header (jisme destination IP, source IP, packet number hota hai).</li>
+  <li>Ye packets alag-alag raaston se travel karke destination tak pahunchte hain, aur wahan pahunch ke reassemble (jod diye jaate hain) ho jaate hain — sahi order mein!</li>
+</ul>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Socho tumhe ek 500-page ki kitaab courier karni hai, lekin courier company bolti hai "Hum ek baar mein sirf 10 pages bhej sakte hain." Toh tum kitaab ko 50 chote packets mein baant dete ho, unpar page-number likh dete ho, aur alag-alag delivery boys se bhej dete ho. Destination par pahunch ke, receiver un packets ko number ke hisaab se jod ke poori kitaab bana leta hai. Yehi Packet Switching hai!</p>
+</blockquote>
+
+<p>⚠️ <strong>Common Mistake:</strong> Log sochte hain data ek "single stream" mein jaata hai jaise ek pipe se paani. Actually mein, Internet Packet Switching technology use karta hai, na ki Circuit Switching (jo purane telephone lines use karti thi jaha ek dedicated line reserve hoti thi).</p>
+
+<h3>3️⃣ Routers — Traffic Police</h3>
+
+<p><strong>Router</strong> ek device hai jo decide karta hai ki har packet ko kis raaste (path) se bhejna hai taaki woh apni destination tak sabse tez pahunche. Internet mein hazaaron routers hote hain, aur ek packet apne destination tak pahunchne se pehle 10-15 different routers (hops) se guzar sakta hai.</p>
+
+<pre>
+Tumhara Laptop → Home Router → ISP Router →
+Regional Router → International Gateway →
+Undersea Cable → Destination Country Router →
+Destination Server
+</pre>
+
+<p>💡 <strong>Pro-Tip:</strong> Agar tumhe apne packets ka safar dekhna hai, toh apne computer ke terminal/cmd mein ye command try karo:</p>
+
+<pre>
+tracert google.com     (Windows)
+traceroute google.com  (Mac/Linux)
+</pre>
+
+<p>Isse tumhe pata chalega ki tumhara data kitne "hops" (routers) se guzar ke Google tak pahuncha!</p>
+
+<h3>4️⃣ DNS (Domain Name System) — The Internet's Phonebook 📞</h3>
+
+<p>Ab sabse important part — <strong>DNS</strong>. Ye interview mein sabse zyada pucha jaane wala topic hai, isliye dhyan se samjho!</p>
+
+<p><strong>Problem:</strong> Computers sirf numbers (IP addresses) samajhte hain, jaise <code>142.250.183.100</code>. Lekin humans ke liye itne numbers yaad rakhna impossible hai! Kya tumhe <code>google.com</code> ke bajaye <code>142.250.183.100</code> yaad rakhna aasaan lagega? Bilkul nahi!</p>
+
+<p><strong>Solution:</strong> DNS ek aisa system hai jo human-readable domain names (jaise <code>google.com</code>) ko unke corresponding IP Addresses mein convert karta hai. Isko "DNS Resolution" kehte hain.</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> DNS ek Phonebook / Contacts App hai! Tumhare phone mein tum "Mom" type karte ho aur call lag jaata hai — lekin phone actually background mein "Mom" naam se juda hua 10-digit phone number dial karta hai. Tumhe number yaad rakhne ki zaroorat nahi. Waise hi, tum browser mein "google.com" type karte ho, aur DNS background mein uska IP address dhoondh ke connect kar deta hai.</p>
+</blockquote>
+
+<h3>DNS Resolution Ka Step-by-Step Process (Deep Dive) 🔍</h3>
+
+<p>Jab tum browser mein <code>www.example.com</code> type karke Enter dabate ho, ye steps hote hain:</p>
+
+<ol>
+  <li><strong>Browser Cache Check</strong> — Browser pehle apni local cache check karta hai: "Kya maine pehle bhi ye domain visit kiya tha?" Agar haan, toh seedha connect ho jaata hai (super fast!).</li>
+  <li><strong>OS Cache Check</strong> — Agar browser cache mein nahi mila, toh Operating System (Windows/Mac) ki apni cache check hoti hai.</li>
+  <li><strong>Recursive DNS Resolver (ISP ka Server)</strong> — Agar kahin cache mein nahi mila, toh request tumhare ISP (Jio/Airtel) ke Recursive DNS Resolver ke paas jaati hai. Ye resolver ab poori "detective duty" apne upar leta hai.</li>
+  <li><strong>Root DNS Server</strong> — Resolver pehle Root Server se pucha hai — "Bhai .com domains kaun handle karta hai?" Root server jawab deta hai: "Jao, TLD server ke paas jao."</li>
+  <li><strong>TLD (Top-Level Domain) Server</strong> — Ab resolver TLD Server (jo saare .com, .org, .in domains ka record rakhta hai) ke paas jaata hai aur pucha hai — "example.com ka Authoritative Server kaun hai?"</li>
+  <li><strong>Authoritative Name Server</strong> — Ye final step hai. Authoritative Server ke paas example.com ka exact IP address hota hai. Ye seedha jawab de deta hai: "Yeh hai IP: 93.184.216.34"</li>
+  <li><strong>IP Address Return &amp; Caching</strong> — Resolver ye IP address tumhare browser ko bhej deta hai, aur future ke liye ise cache kar leta hai.</li>
+  <li><strong>Connection Established!</strong> — Ab browser ke paas IP address hai, aur woh seedha us server se connect ho ke webpage maangta hai.</li>
+</ol>
+
+<pre>
+[Browser] → Cache? → [OS] → Cache? → [ISP Resolver]
+                                          ↓
+                                    [Root Server] → ".com kaun handle karega?"
+                                          ↓
+                                    [TLD Server] → "example.com ka address?"
+                                          ↓
+                              [Authoritative Server] → "Yeh hai: 93.184.216.34"
+                                          ↓
+                                  [Browser ko IP mila!]
+</pre>
+
+<p>💡 <strong>Pro-Tip:</strong> Ye pura process (8 steps) sirf 20-100 milliseconds mein ho jaata hai! Itna fast hai ki tumhe pata hi nahi chalta ki itna bada "detective investigation" chal raha tha peeche.</p>
+
+<p>⚠️ <strong>Common Mistake:</strong> Beginners sochte hain DNS sirf "ek jagah" store hota hai, jaise ek single database. Actually mein, DNS ek distributed, hierarchical system hai — Root Servers, TLD Servers, aur Authoritative Servers duniya bhar mein faile hue hain, taaki system fast aur reliable rahe (single point of failure na ho).</p>
+
+<hr>
+
+<h2>Pillar 3: Client-Server Architecture (The Core Model) 🤝</h2>
+
+<p>Chalo ab samajhte hain ki jab tumhare paas IP address aa gaya (DNS ke through), tab actual communication kaise hoti hai website ke saath.</p>
+
+<h3>Client Kya Hai?</h3>
+<p><strong>Client</strong> woh device/software hai jo request bhejta hai — matlab tumhara Browser (Chrome, Firefox, Edge). Client hamesha kuch maangta hai.</p>
+
+<h3>Server Kya Hai?</h3>
+<p><strong>Server</strong> woh powerful computer hai jo 24x7 chalta rehta hai aur website ki saari files (HTML, CSS, JS, Images, Database) store karta hai. Server ka kaam hai — request receive karna, process karna, aur response bhejna.</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Client-Server Architecture ek "Restaurant" jaisa hai: Tum (Client) waiter ko order dete ho — "Bhaiya ek Paneer Tikka dena." Waiter (Request Carrier) order ko kitchen tak le jaata hai. Kitchen (Server) khaana banata hai (request process karta hai). Waiter khaana wapas tumhare table tak leke aata hai (Response). Tum seedha kitchen mein jaa ke khaana nahi bana sakte — sab kuch is structured process se hota hai!</p>
+</blockquote>
+
+<h3>HTTP Request Ka Poora Lifecycle 🔄</h3>
+<p>Jab client server ko request bhejta hai, tab request ke andar 3 main cheezein hoti hain:</p>
+
+<p><strong>1. HTTP Method (Kya Chahiye?)</strong></p>
+<ul>
+  <li><code>GET</code> — Data maangna (jaise webpage load karna)</li>
+  <li><code>POST</code> — Naya data bhejna/create karna (jaise form submit karna)</li>
+  <li><code>PUT</code> — Existing data update karna</li>
+  <li><code>DELETE</code> — Data delete karna</li>
+</ul>
+
+<p><strong>2. Headers (Extra Information)</strong><br>
+Headers mein metadata hota hai — jaise browser ka type, language preference, cookies, etc.</p>
+
+<pre>
+GET /index.html HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0 (Chrome)
+Accept-Language: en-US
+</pre>
+
+<p><strong>3. Body (Optional Data)</strong><br>
+Sirf POST/PUT requests mein hota hai — jaise form ka data (naam, email, password).</p>
+
+<h3>HTTP Response Ka Poora Lifecycle 🔄</h3>
+<p>Server response bhejta hai jisme bhi 3 cheezein hoti hain:</p>
+
+<p><strong>1. Status Code (Kya Hua?)</strong><br>
+Status codes 3-digit numbers hote hain jo batate hain request ka result kya raha:</p>
+
+<table border="1" cellpadding="8">
+  <tr><th>Code</th><th>Matlab</th><th>Example</th></tr>
+  <tr><td>200</td><td>OK — Sab theek! Successfully mil gaya</td><td>Webpage load ho gaya</td></tr>
+  <tr><td>301</td><td>Redirect — Naye address pe bhej diya gaya</td><td>Old URL → New URL</td></tr>
+  <tr><td>404</td><td>Not Found — Ye page exist nahi karta</td><td>Galat URL type kiya</td></tr>
+  <tr><td>500</td><td>Server Error — Server mein kuch garbar hai</td><td>Server crash ho gaya</td></tr>
+</table>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Status codes restaurant ke waiter ke jawab jaise hain — "200" matlab "Ji sir, aapka order aa raha hai" (sab theek). "404" matlab "Sir, aapne jo dish maangi hai, woh menu mein hi nahi hai!" "500" matlab "Sir, kitchen mein aag lag gayi, kuch garbar hai!"</p>
+</blockquote>
+
+<p><strong>2. Headers (Response Metadata)</strong><br>
+Jaise content-type (HTML hai ya JSON), server ka naam, cookies set karna, etc.</p>
+
+<p><strong>3. Body (Actual Content)</strong><br>
+Ye woh actual HTML code hota hai jo browser ko milta hai aur jisse woh render karega.</p>
+
+<pre>
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 1256
+
+&lt;html&gt;...&lt;/html&gt;
+</pre>
+
+<p>💡 <strong>Pro-Tip:</strong> Chrome mein F12 daba ke DevTools kholo, Network Tab pe jao, aur koi bhi website reload karo. Tumhe live mein saari requests, headers, aur status codes dikhenge! Yeh ek developer ke liye sabse powerful debugging tool hai.</p>
+
+<p>⚠️ <strong>Common Mistake:</strong> Bahut log 404 aur 500 mein confuse ho jaate hain. Yaad rakho: 404 = Client ki galti (galat URL maanga), 500 = Server ki galti (server ke andar code crash ho gaya). Ye difference interview mein zaroor pucha jaata hai!</p>
+
+<hr>
+
+<h2>Pillar 4: Browser Rendering — Code Se Screen Tak Ka Safar 🎨</h2>
+
+<p>Ye sabse magical part hai! Server se HTML text milne ke baad, browser ye text ko visual, interactive webpage mein kaise convert karta hai? Chalo step-by-step samajhte hain.</p>
+
+<h3>Step 1: Parsing (Text Ko Samajhna)</h3>
+<p>Jab browser ko server se raw HTML text milta hai, tab woh sirf characters ka ek lamba string hota hai — browser ke liye ye kuch bhi matlab nahi rakhta jab tak woh use "parse" nahi karta.</p>
+<p><strong>Parsing</strong> ka matlab hai — browser HTML text ko character-by-character padhta hai aur usse tokens mein todta hai (jaise <code>&lt;html&gt;</code>, <code>&lt;body&gt;</code>, <code>&lt;h1&gt;</code>, text content, etc.), aur fir in tokens ko samajh ke unka structure banata hai.</p>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> Parsing ek aisi hai jaise koi tumhe ek IKEA furniture ka instruction manual deta hai jisme sirf symbols aur numbers hain. Parsing woh process hai jisse tum in symbols ko samajh ke jaante ho ki "ye screw yahan lagana hai, ye panel wahan lagana hai."</p>
+</blockquote>
+
+<h3>Step 2: DOM Tree Banana (Document Object Model)</h3>
+<p>Parsing ke baad, browser HTML ke tokens se ek tree-like structure banata hai jise <strong>DOM (Document Object Model)</strong> kehte hain. DOM ek in-memory representation hai tumhare HTML document ka — jisme har HTML tag ek "node" banta hai, aur ye nodes parent-child relationship mein connected hote hain.</p>
+
+<pre>
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello&lt;/h1&gt;
+    &lt;p&gt;Welcome to Reviano Hub&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Iska DOM Tree kuch aisa banega:</p>
+
+<pre>
+        html
+         |
+        body
+       /    \
+     h1      p
+      |       |
+   "Hello"  "Welcome to Reviano Hub"
+</pre>
+
+<blockquote>
+<p>🧠 <strong>Real-world Analogy:</strong> DOM ek "Family Tree" jaisa hai! html sabse bada ancestor hai, body uska child hai, aur h1/p body ke children hain. Har member (node) ka apna specific position hai family (document) mein.</p>
+</blockquote>
+
+<p>💡 <strong>Pro-Tip:</strong> Yehi wajah hai ki JavaScript se hum <code>document.getElementById()</code> ya <code>document.querySelector()</code> use karke webpage ke elements ko access ya modify kar paate hain — kyunki DOM ek live, editable object structure hai, na ki sirf ek static text!</p>
+
+<h3>Step 3: CSSOM Banana (CSS Object Model) — Bonus Concept</h3>
+<p>Jab tak DOM ban raha hota hai, browser CSS files ko bhi parse karta hai aur ek similar tree structure banata hai jise <strong>CSSOM (CSS Object Model)</strong> kehte hain — jisme har element ke styling rules hote hain.</p>
+
+<h3>Step 4: Render Tree Banana</h3>
+<p>Browser DOM Tree + CSSOM ko combine karke ek <strong>Render Tree</strong> banata hai — jisme sirf woh elements hote hain jo actually screen par dikhne wale hain (jaise <code>display: none</code> wale elements is tree mein include nahi hote).</p>
+
+<h3>Step 5: Layout (Reflow) — Kahan Rakhna Hai?</h3>
+<p>Render Tree banne ke baad, browser calculate karta hai ki har element ki exact position aur size kya hogi screen par — matlab "Ye box yahan 200px se start hoga, aur 500px wide hoga." Isse <strong>Layout</strong> ya <strong>Reflow</strong> kehte hain.</p>
+
+<h3>Step 6: Painting (Finally, Pixels On Screen!) 🖌️</h3>
+<p>Ye final step hai — jahan browser actually pixels ko screen par draw karta hai. Colors, text, images, borders — sab kuch is stage mein "paint" hota hai. Isi stage ke baad tumhe apni website screen par dikhti hai!</p>
+
+<pre>
+Raw HTML Text
+     ↓
+  [PARSING]  →  Tokens banaye
+     ↓
+  [DOM TREE]  →  Structure banaya
+     ↓
+  [+ CSSOM]  →  Styling rules jode
+     ↓
+  [RENDER TREE]  →  Visible elements chuna
+     ↓
+  [LAYOUT]  →  Position &amp; Size calculate kiya
+     ↓
+  [PAINTING]  →  Screen par Pixels draw kiye 🎨
+     ↓
+  Tumhari Website Screen Par! ✅
+</pre>
+
+<p>⚠️ <strong>Common Mistake:</strong> Beginners sochte hain browser HTML ko "top-to-bottom" seedha display kar deta hai jaise Notepad. Actually mein, itna complex multi-stage pipeline (Parsing → DOM → CSSOM → Render Tree → Layout → Paint) chalta hai — aur ye sab milliseconds mein hota hai!</p>
+
+<p>💡 <strong>Pro-Tip:</strong> Isi wajah se hum <code>&lt;script&gt;</code> tags ko HTML ke end mein (ya <code>defer</code> attribute ke saath) rakhte hain — kyunki agar JavaScript beech mein aa jaaye, toh woh DOM banne ke process ko block kar sakta hai, jisse website slow load hogi!</p>
+
+<hr>
+
+<h2>🎓 Chapter Summary — Ek Nazar Mein</h2>
+
+<ol>
+  <li><strong>Internet</strong> = Physical infrastructure (cables, routers, data centers). <strong>Web</strong> = Software service (HTML pages + hyperlinks) jo Internet ke upar chalti hai.</li>
+  <li>Internet data ko Packets mein todta hai, unhe IP Addresses ke through Routers se bhejta hai, aur DNS domain names ko IP addresses mein resolve karta hai (jaise ek phonebook).</li>
+  <li>Client (Browser) requests bhejta hai, Server responses deta hai — is poore lifecycle mein Methods, Headers, aur Status Codes (200, 404, 500) important role play karte hain.</li>
+  <li>Browser HTML ko Parse karta hai, DOM Tree banata hai, CSSOM ke saath combine karke Render Tree banata hai, Layout calculate karta hai, aur finally Paint karke screen par webpage dikhata hai.</li>
+</ol>
+
+<p>Bhai, agar tumne yeh pura chapter samajh liya, toh tum already 90% beginners se aage nikal gaye ho — kyunki tumhe pata hai ki "parde ke peeche" kya ho raha hai! Ab next chapter mein hum dekhenge ki HTML actually kaise likha jaata hai aur ye tags kaam kaise karte hain.</p>
+
+<p><strong>Chalo, Chapter 02 ki taraf badhte hain! </strong></p>
+
+<div class="footer-navigation">
+    <a href="chapter02.html" class="next-btn">Next Chapter: Chapter 02 🚀</a>
+    <a href="Html.html" class="back-dashboard-btn">← Back to Dashboard</a>
+</div>
+
+</body>
+</html>
